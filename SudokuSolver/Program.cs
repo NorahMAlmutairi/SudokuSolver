@@ -7,6 +7,7 @@ namespace Sudoku
         class Program
         {
             //By Taif
+            // comment
             static int[,] FillTable()
             {
                 int[,] table = new int[9, 9]; // Array is filled with zero by default
