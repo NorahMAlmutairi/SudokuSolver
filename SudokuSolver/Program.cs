@@ -116,8 +116,26 @@ namespace Sudoku
                     possibleNumbers.Remove(table[i, col]);
                 }
                 // remove every number in the same subgrid from the possible numbers.
-                for (int i = 0; i < 9; i++)
-                    possibleNumbers.Remove(table[(row - row % 3) + (i / 3), (col - col % 3) + (i % 3)]);
+                int RealRow = row;
+                int RealCol = col;
+
+
+                // Find the row where the sub-grid starts
+                if(row <3) row = 0;
+                else if(row < 6) row = 3;
+                else row = 6;
+
+                // Find the column where the sub-grid starts
+                if(col <3) col = 0;
+                else if(col < 6) col = 3;
+                else col = 6;
+
+                // For every number in the sub-grid, remove it from possibleNumbers
+                for(int i = row; i<row+3; i++)
+                    for(int j = col; j<col+3; j++){
+                        possibleNumbers.Remove(table[i, j]);
+                    }
+
                 return possibleNumbers.ToArray();
             }
             //Norah
