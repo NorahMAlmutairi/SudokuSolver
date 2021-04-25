@@ -127,7 +127,7 @@ namespace Sudoku
                 {
                     for (int col = 0; col < 9; col++)
                     {
-                        if (table[row, col] == 0)//check if index is empty
+                        if (table[row, col] == 0) //check if index is empty
                         {
                             int[] possibleNumbers = GetPositionPossibleNumbers(table, row, col);
                             if (possibleNumbers.Length == 0) // if array is empty return false
@@ -138,15 +138,13 @@ namespace Sudoku
                             {
                                 foreach (var possibleNumber in possibleNumbers)
                                 {
-                                    int result = table[row, col];
-                                    // PrintTable(table); // method that prints out the computer solution and the steps in detail
                                     table[row, col] = possibleNumber;
-                                    // Recursive calls
-                                    if (col == 8 && row == 8) return true; // iterated the whole table with valid values
-                                    else if (col == 8 && Solve(table)) return true;
-                                    else if (Solve(table)) return true;
-                                    table[row, col] = result;
+                                    if (col == 8 && row == 8)
+                                        return true; // iterated the whole table with valid values
+                                    else if (Solve(table)) // Recursive calls
+                                        return true;
                                 }
+                                table[row, col] = 0;
                                 return false;
                             }
                         }
