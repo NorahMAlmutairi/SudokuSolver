@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 namespace Sudoku
@@ -119,11 +120,11 @@ namespace Sudoku
                 return possibleNumbers.ToArray();
             }
             //Norah
-            static bool Solve(int[,] table, int row, int col)
+            static bool Solve(int[,] table)
             {
-                for (row = 0; row < 9; row++)
+                for (int row = 0; row < 9; row++)
                 {
-                    for (col = 0; col < 9; col++)
+                    for (int col = 0; col < 9; col++)
                     {
                         if (table[row, col] == 0)//check if index is empty
                         {
@@ -141,8 +142,8 @@ namespace Sudoku
                                     table[row, col] = possibleNumber;
                                     // Recursive calls
                                     if (col == 8 && row == 8) return true; // iterated the whole table with valid values
-                                    else if (col == 8 && Solve(table, row + 1, 0)) return true;
-                                    else if (Solve(table, row, col + 1)) return true;
+                                    else if (col == 8 && Solve(table)) return true;
+                                    else if (Solve(table)) return true;
                                     table[row, col] = result;
                                 }
                                 return false;
@@ -156,8 +157,8 @@ namespace Sudoku
             static void Main(string[] args)
             {
                 int[,] table = FillTable(); // Fill the table with the entered value from user and store it in the 2d array of table
-                                            //now the table is filled and valid
-                if (Solve(table, 0, 0)) // fill the empty indexs and solve the table
+                                            // now the table is filled and valid
+                if (Solve(table))     // fill the empty indexs and solve the table
                 {
                     Console.WriteLine("\n Solution:");
                     PrintTable(table);
